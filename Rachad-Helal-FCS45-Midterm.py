@@ -7,6 +7,10 @@ for line in f:
 print(tickets)
 print(f.read())
 
+#####################################
+# Admin Functions
+#####################################
+
 def showEventID():
   ticket_event_counter = {}
   for ticket in tickets:
