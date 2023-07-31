@@ -1,34 +1,29 @@
 f = open("FCS45-Midterm.txt", "r")
+admin_tickets = []
+user_tickets = []
 tickets = []
-for line in f:
+for line in f: 
+  #to convert each line from the txt file into a list, and then appending to the admin and user list, which will create a matrix.
+  #https://www.youtube.com/watch?v=hUyopAoOpG4&ab_channel=J%27sLab
   line_strip = line.strip()
   line_split = line_strip.split(", ")
   tickets.append(line_split)
-print(tickets)
-print(f.read())
+
+# f = open("FCS45-Midterm.txt", "r")
+# dict = {}
+# for i in range(len(admin_tickets)):
+#   key = tickets[i][0]
+#   value = [admin_tickets [i][1], admin_tickets[i][2], admin_tickets[i][3], admin_tickets[i][4]]
+#   dict[key] = value
+
+#I decided to use matrices instead of dictionary, however kept the code commented for the option to have it.
 
 #####################################
-# Admin Functions
+# User Functions
 #####################################
 
-def showEventID():
-  ticket_event_counter = {}
-  for ticket in tickets:
-    event_id = ticket[1]
-  
-    if event_id in ticket_event_counter:
-      ticket_event_counter[event_id] += 1
-    else:
-      ticket_event_counter[event_id] = 1
-  
-  max_event_number = None
-  max_ticket_count = 0
-  for event_number, ticket_count in ticket_event_counter.items():
-    if ticket_count > max_ticket_count:
-      max_ticket_count = ticket_count
-      max_event_number = event_number
-
-  print("The event id", max_event_number, "has the highest number of tickets, that are:", max_ticket_count)
+def showEventId():
+  pass
 
 def adminBookTicket():
   pass
@@ -66,7 +61,7 @@ def main():
   admin_username = ""
   admin_password = ""
   user_password = ""
-  user_type = input("Enter user type (Admin or Users): ")
+  user_type = input("Welcome! Enter user type (Admin or Users): ")
 
   while user_type.lower() != "admin" and user_type.lower() != "users":
     print("Ivalid input")
@@ -75,7 +70,6 @@ def main():
   is_admin = False        
   if user_type.lower() == "admin":
     is_admin = True
-    admin_username = input("Enter admin username: ")
     admin_password = input("Enter admin password: ")
   elif user_type.lower() == "users":
     user_password = input("Enter user password: ")
@@ -84,12 +78,11 @@ def main():
   if is_admin == True:
     count = 5
     while True: 
-      if admin_username.lower() != "admin" or admin_password.lower() != "admin123123":
+      if admin_password.lower() != "admin123123":
         print("\nIncorrect Username and/or Password")
         if count > 1:
           count -= 1
           print(f"You have {count} remaining trials\n")
-          admin_username = input("Enter admin username: ")
           admin_password = input("Enter admin password: ")
         if count == 1:
           print("The program has been terminated")
@@ -97,7 +90,7 @@ def main():
           
   
     
-      elif admin_username.lower() == "admin" and admin_password.lower() == "admin123123":
+      elif admin_password.lower() == "admin123123":
         adminMenu()
         admin_choice = eval(input("Choose a number from the above menu: "))
         while admin_choice != 7:
@@ -138,7 +131,10 @@ def main():
       print("End of program")
 
 main()
+   
 
+
+      
       
       
 
