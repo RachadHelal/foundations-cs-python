@@ -17,9 +17,17 @@ for line in f:
 #   dict[key] = value
 
 #I decided to use matrices instead of dictionary, however kept the code commented for the option to have it.
+#####################################
+# Program Functions
+#####################################
+
+
+
+   
+
 
 #####################################
-# User Functions
+# Admin Functions
 #####################################
 
 def showEventId():
