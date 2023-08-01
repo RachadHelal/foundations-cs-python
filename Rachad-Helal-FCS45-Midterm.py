@@ -13,8 +13,6 @@ for line in f:
   admin_tickets.append(line_split)
   user_tickets.append(line_split)
 
-print(admin_tickets)
-
 #####################################
 # Program Functions
 #####################################
