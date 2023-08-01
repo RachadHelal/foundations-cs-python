@@ -13,6 +13,8 @@ for line in f:
   admin_tickets.append(line_split)
   user_tickets.append(line_split)
 
+print(admin_tickets)
+
 #####################################
 # Program Functions
 #####################################
@@ -50,7 +52,7 @@ def reverseBubbleSort(l, num):
 #####################################
 # Admin Functions
 #####################################
-print(admin_tickets) #####################################################################################################
+# print(admin_tickets) #####################################################################################################
 
 def showEventId(): #O(N) N being the length of the dict
   print()
@@ -92,21 +94,21 @@ def adminBookTicket(): #O(N) N being the length of the list
       max_ticket_num = latest_ticket_num #we compare the ticket id number in the matrix with the the variable assigned at the beginning of the function. 
       #This way we get the highest ticket number in the matrix and then auto increment from that last higher ticket number.
 
-  print("You are about to book a ticket for an existing event.")
+  print("The admin is about to book a ticket for an existing event.")
   is_event = False #we add this boolean in order to break out thr while loop when the event date and event number is found in the matrix.
   while not is_event:
-    username = input("Please enter username: ")
     event_id = input("Please enter event ID ('ev001'): ")
     event_date = input("Please enter event date (YYYYMMDD): ")
-    priority_num = input("Please enter priority number: ")
+    username = input("Please enter username: ")
+    priority_num = input("Please enter the priority number for the new ticket: ")
     for ticket in admin_tickets:
-      if event_id and event_date in ticket: #checking if event id and date are in the tickets we are iterating through.
-        is_event = True #if the boolean is true, then the event date and number are found, which will allow us to book a new ticket.
+      if event_id == ticket[1] and event_date == ticket[3]: #checking if event id and date are in the tickets we are iterating through
+        is_event = True #if the boolean is true, then the event date and number are found, which will allow us to book a new ticket. 
         lst = ["tick" + str(max_ticket_num + 1), event_id, username, event_date, priority_num] #creating the ticket in order to add 
         #it to the matrix (list of tickets) after booking it. 
     if not is_event: #if the event id and date are not in the list of tickets, then the below will be printed and we 
       #repeat the process of booking a ticket until the event date and Id input by the user matches the ones in the ticket lists.
-      print("The event date or event ID does not exist, please try again.")
+      print("The event date or event ID does not exist, or the event specified is taking place on another date")
 
   admin_tickets.append(lst) #we are adding the newly booked ticket to the matrix of tickets.
   print()
@@ -204,87 +206,126 @@ def displayEvents(): #O(N^2) N being the length of the list
 # User Functions
 #####################################
 
-def userBookTicket():
-  pass
+def userBookTicket(): #O(N) N being the length of the list
+  print()
+  max_ticket_num = 0 #we assign a variable in order to compare it with actual ticket number and in order
+  #to use it later on when auto incrementing ticket ID number.
+  for ticket in user_tickets: #O(N) N being the length of the list
+    latest_ticket_num = int(ticket[0][4:]) #we are casting the ticket number into an integer so we are able to auto increment it later.
+    if max_ticket_num < latest_ticket_num:
+      max_ticket_num = latest_ticket_num #we compare the ticket id number in the matrix with the the variable assigned at the beginning of the function. 
+      #This way we get the highest ticket number in the matrix and then auto increment from that last higher ticket number.
 
-#####################################
-# Admin Menu
-#####################################
+  print("The admin is about to book a ticket for an existing event.")
+  is_event = False #we add this boolean in order to break out thr while loop when the event date and event number is found in the matrix.
+  while not is_event:
+    event_id = input("Please enter event ID ('ev001'): ")
+    event_date = input("Please enter event date (YYYYMMDD): ")
+    username = "users"
+    priority_num = str(0)
+    for ticket in user_tickets:
+      if event_id == ticket[1] and event_date == ticket[3]: #checking if event id and date are in the tickets we are iterating through
+        is_event = True #if the boolean is true, then the event date and number are found, which will allow us to book a new ticket.
+        lst = ["tick" + str(max_ticket_num + 1), event_id, username, event_date, priority_num] #creating the ticket in order to add 
+        #it to the matrix (list of tickets) after booking it. 
+    if not is_event: #if the event id and date are not in the list of tickets, then the below will be printed and we 
+      #repeat the process of booking a ticket until the event date and Id input by the user matches the ones in the ticket lists.
+      print("The event date or event ID does not exist, or the event specified is taking place on another date")
 
-# def adminMenu(): #O(1)
-#   print("1. Display Statistics\n2. Book a Ticket\n3. Display all Tickets\n4. Change Ticket's Priority\n5. Disable Ticket\n6. Run Events\n7. Exit")
+  user_tickets.append(lst) #we are adding the newly booked ticket to the matrix of tickets.
+  print()
+  print("The added ticket is: ", lst)
+  print()
+  print("Tickets updated are: ", user_tickets)
+  print()
 
-# def userMenu(): #O(1)
-#   print("1. Book a ticket\n2. Exit")
-
-# def main(): #O(N) for N being the user input
-#   admin_username = ""
-#   admin_password = ""
-#   user_password = ""
-#   user_type = input("Welcome! Enter user type (Admin or Users): ")
-
-#   while user_type.lower() != "admin" and user_type.lower() != "users":
-#     print("Ivalid input")
-#     user_type = input("Enter user type (Admin or Users): ")
-    
-#   is_admin = False        
-#   if user_type.lower() == "admin":
-#     is_admin = True
-#     admin_password = input("Enter admin password: ")
-#   elif user_type.lower() == "users":
-#     user_password = input("Enter user password: ")
-
-#   if is_admin == True:
-#     count = 5
-#     while True: 
-#       if admin_password.lower() != "admin123123":
-#         print("\nIncorrect Username and/or Password")
-#         if count > 1:
-#           count -= 1
-#           print(f"You have {count} remaining trials\n")
-#           admin_password = input("Enter admin password: ")
-#         if count == 1:
-#           print("The program has been terminated")
-#           break      
-     
-#       elif admin_password.lower() == "admin123123":
-#         adminMenu()
-#         admin_choice = eval(input("Choose a number from the above menu: "))
-#         while admin_choice != 7:
-#           if admin_choice == 1:
-#             showEventID() 
-#           elif admin_choice == 2:
-#             adminBookTicket()
-#           elif admin_choice == 3:
-#             showAllTickets()
-#           elif admin_choice == 4:
-#             changePriority()
-#           elif admin_choice == 5:
-#             removeTicket()
-#           elif admin_choice == 6:
-#             displayEvents()
-#           else:
-#             print("Invalid input\n")
-#           adminMenu()
-#           admin_choice = eval(input("Choose a number from the above menu: "))
-#         print("End of program")
-#         break
+  new_ticket = ""
+  for element in lst: #O(N) N being the length of the list
+    new_ticket += element + ", "
+  new_ticket_modified = new_ticket[:-2] #adding the the elements of the list to a variable to add to the txt file
   
-#   if is_admin == False:
-#     while user_password != "":
-#       print("Password should be empty")
-#       user_password = input("Enter user password: ")
+  a = open("FCS45-Midterm.txt", "a") 
+  a.write("\n" + new_ticket_modified) #adding the the elements of the variable to the txt file
+  a.close() 
 
-#     if user_password == "":
-#       userMenu()
-#       user_choice = eval(input("Choose a number from the above menu: "))
-#       while user_choice != 2:
-#         if user_choice == 1:
-#           userBookTicket()
-#         else:
-#           print("Invalid input\n")
-#         userMenu()
-#         user_choice = eval(input("Choose a number from the above menu: "))
-#       print("End of program")
+####################################
+#Admin Menu
+####################################
 
-# main()
+def adminMenu(): #O(1)
+  print("1. Display Statistics\n2. Book a Ticket\n3. Display all Tickets\n4. Change Ticket's Priority\n5. Disable Ticket\n6. Run Events\n7. Exit")
+
+def userMenu(): #O(1)
+  print("1. Book a ticket\n2. Exit")
+
+def main(): #O(N) for N being the user input
+  admin_username = ""
+  admin_password = ""
+  user_password = ""
+  user_type = input("Welcome! Enter user type (Admin or Users): ")
+
+  while user_type.lower() != "admin" and user_type.lower() != "users":
+    print("Ivalid input")
+    user_type = input("Enter user type (Admin or Users): ")
+    
+  is_admin = False        
+  if user_type.lower() == "admin":
+    is_admin = True
+    admin_password = input("Enter admin password: ")
+  elif user_type.lower() == "users":
+    user_password = input("Enter user password: ")
+
+  if is_admin == True:
+    count = 5
+    while True: 
+      if admin_password.lower() != "admin123123":
+        print("\nIncorrect Username and/or Password")
+        if count > 1:
+          count -= 1
+          print(f"You have {count} remaining trials\n")
+          admin_password = input("Enter admin password: ")
+        if count == 1:
+          print("The program has been terminated")
+          break      
+     
+      elif admin_password.lower() == "admin123123":
+        adminMenu()
+        admin_choice = eval(input("Choose a number from the above menu: "))
+        while admin_choice != 7:
+          if admin_choice == 1:
+            showEventId() 
+          elif admin_choice == 2:
+            adminBookTicket()
+          elif admin_choice == 3:
+            showAllTickets()
+          elif admin_choice == 4:
+            changePriority()
+          elif admin_choice == 5:
+            removeTicket()
+          elif admin_choice == 6:
+            displayEvents()
+          else:
+            print("Invalid input\n")
+          adminMenu()
+          admin_choice = eval(input("Choose a number from the above menu: "))
+        print("End of program")
+        break
+  
+  if is_admin == False:
+    while user_password != "":
+      print("Password should be empty")
+      user_password = input("Enter user password: ")
+
+    if user_password == "":
+      userMenu()
+      user_choice = eval(input("Choose a number from the above menu: "))
+      while user_choice != 2:
+        if user_choice == 1:
+          userBookTicket()
+        else:
+          print("Invalid input\n")
+        userMenu()
+        user_choice = eval(input("Choose a number from the above menu: "))
+      print("End of program")
+
+main()
