@@ -155,6 +155,7 @@ def changePriority(): #O(N) N being the length of the list
         print("The modified ticket is: ", ticket)
     if not is_ticket:
       print("The ticket you are searching for was not found, please try again")
+  print()
 
 def removeTicket(): #O(N) N being the length of the list
   print()
@@ -174,9 +175,30 @@ def removeTicket(): #O(N) N being the length of the list
       print("The ticket you are searching for was not found, please try again")
   print()
   print("The remaining tickets are: ", admin_tickets)
+  print()
 
-def displayEvents():
-  pass
+def displayEvents(): #O(N^2) N being the length of the list
+  print()
+  todays_events = [] #we are creating an empty list to add todays tickets in them, and sort them.
+  today = datetime.now().date() #we are creating a today variable where we can compare the event date with today's date.
+  for ticket in admin_tickets: #O(N) N being the length of the list
+    event_date = datetime.strptime(ticket[3], "%Y%m%d").date()
+    ticket[4] = int(ticket[4])
+    if event_date == today:
+      todays_events.append(ticket)
+      reverseBubbleSort(todays_events, 4) #O(N^2) N being the length of the list
+      # today_tickets.sort(key=lambda ticket: ticket[4]) 
+      #https://www.geeksforgeeks.org/python-sort-list-according-second-element-sublist/
+      #The above sorts the list based on the fourth element in the ticket, which is the ticket priority. The time complexity
+      # of this function is O(N*logN) which is better than the bubble sort being O(n^2). I prefered doing the bubble sort 
+      # to practice, but I would choose the sort function above for a better time complexity.
+  for ticket in todays_events: #O(N) N being the length of the list
+    if ticket in admin_tickets: #if the tickets from today's events are in the main matrix (admin_tickets), they will be removed
+      admin_tickets.remove(ticket)
+  print("Today's events sorted by priority are: ", todays_events)
+  print()
+  print("The remaining tickets are: ", admin_tickets)
+  print()
 
 #####################################
 # User Functions
