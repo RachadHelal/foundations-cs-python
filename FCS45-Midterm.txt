@@ -14,11 +14,3 @@ tick102, ev002, rachad, 20230801, 9
 tick103, ev001, ameer, 20230801, 5
 tick115, ev009, firas, 20230701, 15
 tick116, ev009, besher, 20230701, 16
-tick117, ev001, users, 20230801, 0
-tick118, ev001, users, 20230801, 0
-tick119, ev001, users, 20230801, 0
-tick120, ev001, users, 20230801, 0
-tick121, ev001, users, 20230801, 0
-tick122, ev001, users, 20230801, 0
-tick123, ev002, users, 20230801, 0
-tick124, ev002, users, 20230801, 0
