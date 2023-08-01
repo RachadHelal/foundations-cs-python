@@ -50,7 +50,7 @@ def reverseBubbleSort(l, num):
 #####################################
 # Admin Functions
 #####################################
-print(admin_tickets)
+print(admin_tickets) #####################################################################################################
 
 def showEventId(): #O(N) N being the length of the dict
   print()
@@ -82,8 +82,32 @@ def showEventId(): #O(N) N being the length of the dict
   print(f"The maximum tickets are {maximum_ticket_event} for the event {event_id}")
   print()
 
-def adminBookTicket():
-  pass
+def adminBookTicket(): #O(N) N being the length of the list
+  print()
+  max_ticket_num = 0 #we assign a variable in order to compare it with actual ticket number and in order
+  #to use it later on when auto incrementing ticket ID number.
+  for ticket in admin_tickets: #O(N) N being the length of the list
+    latest_ticket_num = int(ticket[0][4:]) #we are casting the ticket number into an integer so we are able to auto increment it later.
+    if max_ticket_num < latest_ticket_num:
+      max_ticket_num = latest_ticket_num #we compare the ticket id number in the matrix with the the variable assigned at the beginning of the function. 
+      #This way we get the highest ticket number in the matrix and then auto increment from that last higher ticket number.
+
+  print("You are about to book a ticket for an existing event.")
+  username = input("Please enter username: ")
+  event_id = input("Please enter event ID ('ev001'): ")
+  event_date = input("Please enter event date (YYYYMMDD): ")
+  priority_num = input("Please enter priority number: ")
+  
+  lst = ["tick" + str(max_ticket_num + 1), event_id, username, event_date, priority_num] #creating the ticket in order to add it to the matrix 
+  #(list of tickets) after booking it. 
+  admin_tickets.append(lst) #we are adding the newly booked ticket to the matrix of tickets.
+  print()
+  print("The added ticket is: ", lst)
+  print()
+  print("Tickets updated are: ", admin_tickets)
+  print()
+
+adminBookTicket()
 
 def showAllTickets():
   pass
