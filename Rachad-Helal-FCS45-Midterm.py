@@ -115,10 +115,28 @@ def adminBookTicket(): #O(N) N being the length of the list
   print("Tickets updated are: ", admin_tickets)
   print()
 
-adminBookTicket()
-
-def showAllTickets():
-  pass
+def showAllTickets(): #O(N^2) N being the length of the list
+  print()
+  pending_events = [] #we create an empty list to showcase all event that will take place today or in the future.
+  old_events = [] #we create an empty list to showcase all event that already took place.
+  today = datetime.now().date() #we are creating a today variable where we can compare the event date with today's date. I got this from google.
+  for ticket in admin_tickets: #O(N) N being the length of the list
+    event_date = datetime.strptime(ticket[3], "%Y%m%d").date() #we are assigning the index 3 of each ticket as a date in order to 
+    #compare it with today's date. 
+    #https://stackoverflow.com/questions/3278999/how-can-i-compare-a-date-and-a-datetime-in-python
+    if event_date >= today: #if the event's date is either TODAY or in the future, then that ticket will be appended
+      # to the pending_events list
+      pending_events.append(ticket)
+    else: #if the event's date is in the past, then that ticket will be appended to the old_events list
+      old_events.append(ticket)
+  print("The old events are: ", old_events)
+  print()
+  print("The pending events are: ", pending_events)
+  print()
+  bubbleSort(pending_events, 3) #O(N^2) N being the length of the list. Here we are sorting based on event date (index 3)
+  bubbleSort(pending_events, 1) #O(N^2) N being the length of the list. Here we are sorting based on event ID (index 1)
+  print("The pending events sorted by event date and id are: ", pending_events)
+  print()
 
 def changePriority():
   pass
