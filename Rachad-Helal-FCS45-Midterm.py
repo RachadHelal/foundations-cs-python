@@ -93,13 +93,21 @@ def adminBookTicket(): #O(N) N being the length of the list
       #This way we get the highest ticket number in the matrix and then auto increment from that last higher ticket number.
 
   print("You are about to book a ticket for an existing event.")
-  username = input("Please enter username: ")
-  event_id = input("Please enter event ID ('ev001'): ")
-  event_date = input("Please enter event date (YYYYMMDD): ")
-  priority_num = input("Please enter priority number: ")
-  
-  lst = ["tick" + str(max_ticket_num + 1), event_id, username, event_date, priority_num] #creating the ticket in order to add it to the matrix 
-  #(list of tickets) after booking it. 
+  is_event = False #we add this boolean in order to break out while loop when the event date and event number is found in the matrix.
+  while not is_event:
+    username = input("Please enter username: ")
+    event_id = input("Please enter event ID ('ev001'): ")
+    event_date = input("Please enter event date (YYYYMMDD): ")
+    priority_num = input("Please enter priority number: ")
+    for ticket in admin_tickets:
+      if event_id and event_date in ticket: #checking if event id and date are in the tickets we are iterating through.
+        is_event = True #if the boolean is true, then the event date and number are found, which will allow us to book a new ticket.
+        lst = ["tick" + str(max_ticket_num + 1), event_id, username, event_date, priority_num] #creating the ticket in order to add 
+        #it to the matrix (list of tickets) after booking it. 
+    if not is_event: #if the event id and date are not in the list of tickets, then the below will be printed and we 
+      #repeat the process of booking a ticket until the event date and Id input by the user matches the ones in the ticket lists.
+      print("The event date or event ID does not exist, please try again.")
+
   admin_tickets.append(lst) #we are adding the newly booked ticket to the matrix of tickets.
   print()
   print("The added ticket is: ", lst)
