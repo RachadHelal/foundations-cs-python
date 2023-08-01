@@ -154,10 +154,26 @@ def changePriority(): #O(N) N being the length of the list
         ticket[4] = new_priority #setting the new priority number
         print("The modified ticket is: ", ticket)
     if not is_ticket:
-      print("The ticket you are looking for was not found, please try again")
+      print("The ticket you are searching for was not found, please try again")
 
-def removeTicket():
-  pass
+def removeTicket(): #O(N) N being the length of the list
+  print()
+  print("You are about to remove a ticket from the system.")
+  is_ticket = False #we set the boolean as false so it turns true when the ticket ID matches witht the input ticket id number
+  while not is_ticket:
+    ticket_id = input("Enter the ticket ID to remove the ticket ('tick101'): ")
+    print()
+    for ticket in admin_tickets: #O(N) N being the length of the list
+      if ticket_id in ticket:  #we iterate through evey ticket and we check if the ticketID of every ticket matches with
+        #the ticket number input by the user, if they match, then the boolean becomes true, which will allows us to move on 
+        #and remove the ticket from the matrix using the remove function below (.remove()). The while loop will automatically break after this.
+        is_ticket = True
+        print("The ticket to be removed is: ", ticket)
+        admin_tickets.remove(ticket)
+    if not is_ticket:
+      print("The ticket you are searching for was not found, please try again")
+  print()
+  print("The remaining tickets are: ", admin_tickets)
 
 def displayEvents():
   pass
