@@ -9,7 +9,7 @@ tick114, ev008, jad, 20230806, 14
 tick104, ev003, hassan, 20230802, 10
 tick105, ev003, saeed, 20230802, 4
 tick106, ev003, moe, 20230802, 2
-tick101, ev001, fred, 20230731, 11
-tick102, ev002, rachad, 20230731, 9
-tick103, ev001, ameer, 20230731, 5
+tick101, ev001, fred, 20230801, 11
+tick102, ev002, rachad, 20230801, 9
+tick103, ev001, ameer, 20230801, 5
 tick115, ev009, firas, 20230701, 15
