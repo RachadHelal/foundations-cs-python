@@ -1,30 +1,23 @@
-from datetime import datetime #add the website here
+from datetime import datetime 
+#https://stackoverflow.com/questions/15707532/import-datetime-v-s-from-datetime-import-datetime
 f = open("FCS45-Midterm.txt", "r")
 admin_tickets = []
 user_tickets = []
 tickets = []
 for line in f: 
-  #to convert each line from the txt file into a list, and then appending to the admin and user list, which will create a matrix.
+  #to convert each line from the txt file into a list, and then appending to the admin and user list 
+  #which will create a matrix.
   #https://www.youtube.com/watch?v=hUyopAoOpG4&ab_channel=J%27sLab
   line_strip = line.strip()
   line_split = line_strip.split(", ")
   admin_tickets.append(line_split)
   user_tickets.append(line_split)
 
-# f = open("FCS45-Midterm.txt", "r")
-# dict = {}
-# for i in range(len(admin_tickets)):
-#   key = tickets[i][0]
-#   value = [admin_tickets [i][1], admin_tickets[i][2], admin_tickets[i][3], admin_tickets[i][4]]
-#   dict[key] = value
-
-#I decided to use a matrix instead of dictionary, however kept the code commented for the option to have it.
-
 #####################################
 # Program Functions
 #####################################
 
-def bubbleSort(l, num):  #defining the bubble sort algorithm that I will use later on in the program
+def bubbleSort(l, num):  
   for x in range(len(l)):
     check_swap = False
     for y in range(len(l) -x -1):
@@ -36,8 +29,10 @@ def bubbleSort(l, num):  #defining the bubble sort algorithm that I will use lat
 
     if not check_swap:
       return l
+    #defining the bubble sort algorithm that I will use later on in the program. 
+    #Where l is the matrix and num is the index of the sorting element.
 
-def reverseBubbleSort(l, num):  #defining the bubble sort algorithm that I will use later on in the program
+def reverseBubbleSort(l, num):  
   for x in range(len(l)):
     check_swap = False
     for y in range(len(l) -x -1):
@@ -49,14 +44,43 @@ def reverseBubbleSort(l, num):  #defining the bubble sort algorithm that I will 
 
     if not check_swap:
       return l
+    #defining the bubble sort algorithm that I will use later on in the program. 
+    #Where l is the matrix and num is the index of the sorting element 
   
 #####################################
 # Admin Functions
 #####################################
 print(admin_tickets)
 
-def showEventId():
-  pass
+def showEventId(): #O(N) N being the length of the dict
+  print()
+  events_check = {}
+  for ticket in admin_tickets: #O(N) N being the length of the list
+    if ticket[1] in events_check:
+      events_check[ticket[1]] += 1
+    else:
+      events_check[ticket[1]] = 1
+    #Here we are checking if the first index in ticket, being the event, is in the empty dictionary. 
+      #if it is, then the value of that key will be incremented by 1. If it is not, then a new dict will be created 
+      #with the key as the eventID and the value of 1. This way we will have the keys in the dict as all event ID's with 
+      #the value as how many ticket each event has. You can see below when the dict events_check gets printed.
+
+  maximum_ticket_event = 0 
+  event_id = ""
+  #we set variables in order to compare with the dict key and value. 
+  #this allows us later to store the max value of tickets with their corresponding event ID key.
+
+  for event_number, ticket_count in events_check.items():
+    if maximum_ticket_event < ticket_count:
+      maximum_ticket_event = ticket_count
+      event_id = event_number
+  #here we are doing the comparison mentioned above and storing a new value for max tickets and getting their 
+  #corresponding event ID.
+
+  print(events_check)
+  print()
+  print(f"The maximum tickets are {maximum_ticket_event} for the event {event_id}")
+  print()
 
 def adminBookTicket():
   pass
@@ -84,13 +108,13 @@ def userBookTicket():
 # Admin Menu
 #####################################
 
-# def adminMenu():
+# def adminMenu(): #O(1)
 #   print("1. Display Statistics\n2. Book a Ticket\n3. Display all Tickets\n4. Change Ticket's Priority\n5. Disable Ticket\n6. Run Events\n7. Exit")
 
-# def userMenu():
+# def userMenu(): #O(1)
 #   print("1. Book a ticket\n2. Exit")
 
-# def main():
+# def main(): #O(N) for N being the user input
 #   admin_username = ""
 #   admin_password = ""
 #   user_password = ""
