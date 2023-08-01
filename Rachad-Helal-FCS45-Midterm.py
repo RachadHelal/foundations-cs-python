@@ -93,7 +93,7 @@ def adminBookTicket(): #O(N) N being the length of the list
       #This way we get the highest ticket number in the matrix and then auto increment from that last higher ticket number.
 
   print("You are about to book a ticket for an existing event.")
-  is_event = False #we add this boolean in order to break out while loop when the event date and event number is found in the matrix.
+  is_event = False #we add this boolean in order to break out thr while loop when the event date and event number is found in the matrix.
   while not is_event:
     username = input("Please enter username: ")
     event_id = input("Please enter event ID ('ev001'): ")
@@ -138,8 +138,23 @@ def showAllTickets(): #O(N^2) N being the length of the list
   print("The pending events sorted by event date and id are: ", pending_events)
   print()
 
-def changePriority():
-  pass
+def changePriority(): #O(N) N being the length of the list
+  print()
+  print("You are about to change the priority of a ticket")
+  is_ticket = False #we set the boolean as false so it turns true when the ticket ID matches witht the input ticket id number 
+  #from the user and this will allows us to change the priority of any ticket the user inputs as long as it is in the matrix.
+  while not is_ticket:
+    ticket_id = input("Enter ticket ID to change ('tick101'): ")
+    for ticket in admin_tickets: #O(N) N being the length of the list
+      if ticket_id in ticket:
+        is_ticket = True #we iterate through evey ticket and we check if the ticketID of every ticket matches with
+        #the ticket number input by the user, if they match, then the boolean becomes true, which will allows us to move on 
+        # and change the priority of the ticket, and then the while loop will automatically break.
+        new_priority = input("Enter a new priority number for the ticket: ")
+        ticket[4] = new_priority #setting the new priority number
+        print("The modified ticket is: ", ticket)
+    if not is_ticket:
+      print("The ticket you are looking for was not found, please try again")
 
 def removeTicket():
   pass
